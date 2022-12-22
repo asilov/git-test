@@ -11,7 +11,25 @@ const SearchExercises = () => {
       >
         Awesome Exercises You <br /> Should Know
       </Typography>
-      <Box position='relative' mb='72px'></Box>
+      <Box position='relative' mb='72px'>
+        <TextField 
+          sx={{
+            input: {
+              fontWeight: '700',
+              border: 'none',
+              borderRadius: '4px'
+            },
+            width: { lg: '1170px', xs: '350px'},
+            backgroundColor: '#fff',
+            borderRadius: '40px'
+          }}
+          height='76px'
+          value=''
+          onChange={(e) => {}}
+          placeholder='Search Exercises'
+          type='text'
+        />
+      </Box>
     </Stack>
   )
 }
