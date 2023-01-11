@@ -12,10 +12,11 @@ const ExerciseDetail = () => {
 	const [exerciseVideos, setExerciseVideos] = useState([])
 	const [targetMuscleExercises, setTargetMuscleExercises] = useState([])
 	const [equipmentExercises, setEquipmentExercises] = useState([])
-
 	const { id } = useParams()
 
 	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: 'smooth' })
+
 		const fetchExerciseData = async () => {
 			const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com'
 			const youtubeSearchUrl =
@@ -28,7 +29,7 @@ const ExerciseDetail = () => {
 			setExerciseDetail(exerciseDetailData)
 
 			const exerciseVideosData = await fetchData(
-				`${youtubeSearchUrl}/search?q=${exerciseDetailData.name}`,
+				`${youtubeSearchUrl}/search?query=${exerciseDetailData.name} exercise`,
 				youtubeOptions
 			)
 			setExerciseVideos(exerciseVideosData.contents)
@@ -39,18 +40,20 @@ const ExerciseDetail = () => {
 			)
 			setTargetMuscleExercises(targetMuscleExercisesData)
 
-			const equimentExercisesData = await fetchData(
+			const equipmentExercisesData = await fetchData(
 				`${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`,
 				exerciseOptions
 			)
-			setEquipmentExercises(equimentExercisesData)
+			setEquipmentExercises(equipmentExercisesData)
 		}
 
 		fetchExerciseData()
 	}, [id])
 
+	if (!exerciseDetail) return <div>No Data</div>
+
 	return (
-		<Box>
+		<Box sx={{ mt: { lg: '96px', xs: '60px' } }}>
 			<Detail exerciseDetail={exerciseDetail} />
 			<ExerciseVideos
 				exerciseVideos={exerciseVideos}

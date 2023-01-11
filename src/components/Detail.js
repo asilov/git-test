@@ -70,4 +70,5 @@ const Detail = ({ exerciseDetail }) => {
 	)
 }
 
+
 export default Detail
